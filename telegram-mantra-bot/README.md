@@ -2,6 +2,7 @@
 
 This project implements a simple Telegram bot that guides a user through a short Socratic dialog and generates a personal mantra. Answers and mantras are stored in a PostgreSQL database. The GPT-4 call is currently stubbed and the bot returns a predefined mantra without contacting OpenAI.
 
+
 ## Setup
 
 1. Install dependencies:
