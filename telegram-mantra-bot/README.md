@@ -1,6 +1,7 @@
 # Telegram Mantra Bot
 
-This project implements a simple Telegram bot that guides a user through a short Socratic dialog and generates a personal mantra using GPT-4. Answers and mantras are stored in a PostgreSQL database.
+This project implements a simple Telegram bot that guides a user through a short Socratic dialog and generates a personal mantra. Answers and mantras are stored in a PostgreSQL database. The GPT-4 call is currently stubbed and the bot returns a predefined mantra without contacting OpenAI.
+
 
 ## Setup
 
@@ -14,7 +15,7 @@ pip install -r requirements.txt
 
 ```bash
 BOT_TOKEN=<telegram token>
-OPENAI_API_KEY=<openai key>
+# OPENAI_API_KEY=<openai key>  # optional, stub mantra used if empty
 DATABASE_URL=postgresql://user:pass@localhost/db
 ```
 

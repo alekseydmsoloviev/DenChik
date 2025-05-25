@@ -7,7 +7,7 @@ from .reminders import schedule_reminder
 
 router = Router()
 config = load_config()
-openai.api_key = config.openai_api_key
+DEFAULT_MANTRA = 'Слушайте эту мантру каждый день: «Я спокоен и полон сил.»'
 
 
 @router.message(lambda m: m.text and m.text.lower() == 'идёт генерация мантры...')
@@ -15,9 +15,11 @@ async def generate_mantra(message: types.Message, state: dict) -> None:
     if not state.get('answers_done'):
         return
     session = SessionLocal()
-    prompt = 'Создай вдохновляющую мантру на основе предыдущих ответов.'
-    response = openai.ChatCompletion.create(model='gpt-4', messages=[{'role': 'user', 'content': prompt}])
-    text = response.choices[0].message.content
+    # When no OpenAI API key is configured, use a predefined mantra as a stub
+    text = DEFAULT_MANTRA
+    # prompt = 'Создай вдохновляющую мантру на основе предыдущих ответов.'
+    # response = openai.ChatCompletion.create(model='gpt-4', messages=[{'role': 'user', 'content': prompt}])
+    # text = response.choices[0].message.content
     mantra = Mantra(topic_id=state['topic'].id, text=text, step_index=1)
     session.add(mantra)
     session.commit()
