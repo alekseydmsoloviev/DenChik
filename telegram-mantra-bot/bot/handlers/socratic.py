@@ -1,4 +1,5 @@
 from aiogram import Router, types, F
+from aiogram.filters import CallbackQuery
 from ..models import SessionLocal, User, Topic, Answer
 
 router = Router()
@@ -12,7 +13,7 @@ QUESTIONS = [
 ]
 
 
-@router.callback_query(lambda c: c.data == 'start_diag')
+@router.callback_query(CallbackQuery(data='start_diag'))
 async def start_diag(query: types.CallbackQuery, state: dict) -> None:
     state['topic'] = Topic(user_id=await User.id_by_telegram(query.from_user.id), title='Новая тема')
     session = SessionLocal()
