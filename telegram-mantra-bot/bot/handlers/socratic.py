@@ -13,8 +13,8 @@ QUESTIONS = [
 ]
 
 
-@router.callback_query(CallbackQuery(data='start_diag'))
-async def start_diag(query: types.CallbackQuery, state: dict) -> None:
+@router.callback_query(CallbackQuery(data='begin_questions'))
+async def begin_questions(query: types.CallbackQuery, state: dict) -> None:
     state['topic'] = Topic(user_id=await User.id_by_telegram(query.from_user.id), title='Новая тема')
     session = SessionLocal()
     session.add(state['topic'])
